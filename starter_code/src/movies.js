@@ -2,36 +2,42 @@
 
 // Iteration 1: Ordering by year - Order by year, ascending (in growing order)
 
-const orderByYear = arr =>
-    [...arr].sort((a, b) =>
-        a.year === b.year ? a.title.localeCompare(b.title) : a.year - b.year
-    );
+const orderByYear = arr => {
+    return [...arr].sort((a, b) => {
+        return a.year === b.year
+            ? a.title.localeCompare(b.title)
+            : a.year - b.year;
+    });
+};
 
 // Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct
 
-const howManyMovies = arr =>
-    arr.filter(
-        movie =>
+const howManyMovies = arr => {
+    return arr.filter(movie => {
+        return (
             movie.genre.includes("Drama") &&
             movie.director === "Steven Spielberg"
-    ).length;
+        );
+    }).length;
+};
 
 // includes() to loop through the array and check the word wanted
 
 // Iteration 3: Alphabetic Order - Order by title and print the first 20 titles
 
-const orderAlphabetically = arr =>
-    arr
+const orderAlphabetically = arr => {
+    return arr
         .map(element => element.title)
         .sort((a, b) => a.localeCompare(b))
         .slice(0, 20);
+};
 
 // localeCompare() to order alphabetically and slice() to get just 20
 
 // Iteration 4: All rates average - Get the average of all rates with 2 decimals
 
-const ratesAverage = arr =>
-    arr.length === 0
+const ratesAverage = arr => {
+    return arr.length === 0
         ? 0
         : Number(
               (
@@ -40,13 +46,15 @@ const ratesAverage = arr =>
                       .reduce((acc, cur) => acc + cur.rate, 0) / arr.length
               ).toFixed(2)
           );
+};
 
 // "?" operator to check invalid arrays, use Number() to convert the result because toFixed() changed the type to string
 
 // Iteration 5: Drama movies - Get the average of Drama Movies
 
-const dramaMoviesRate = arr =>
-    ratesAverage(arr.filter(element => element.genre.includes("Drama")));
+const dramaMoviesRate = arr => {
+    return ratesAverage(arr.filter(element => element.genre.includes("Drama")));
+};
 
 // Reuse ratesAverage function
 
@@ -88,18 +96,19 @@ const turnHoursToMinutes = arr => {
 const bestYearAvg = arr => {
     // Make two conditions to edge cases
     if (arr.length === 0) return null;
-    if (arr.length === 1)
+    if (arr.length === 1) {
         return `The best year was ${arr[0].year} with an average rate of ${arr[0].rate}`;
+    }
 
     let orderByYear = arr.sort((a, b) => a.year - b.year);
 
     // Here I declare the variables to organize my ideas
-    let currentYear = orderByYear[0].year;
-    let oneYearOnly = [];
-    let separatedByYear = [];
-    let rateAvgByYear;
-    let bestAvgRate = 0;
-    let indexOfTheBestYear = 0;
+    let currentYear = orderByYear[0].year,
+        oneYearOnly = [],
+        separatedByYear = [],
+        rateAvgByYear,
+        bestAvgRate = 0,
+        indexOfTheBestYear = 0;
 
     // Make an array of arrays, which contains the movies of one year only and each position
     orderByYear.forEach(element => {
