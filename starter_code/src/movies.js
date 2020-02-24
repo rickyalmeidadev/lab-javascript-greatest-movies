@@ -34,10 +34,12 @@ const ratesAverage = arr =>
     arr.length === 0
         ? 0
         : Number(
-              arr
-                  .filter(element => element.rate)
-                  .reduce((acc, cur) => acc + cur.rate, 0) / arr.length
-          ).toFixed(2);
+              (
+                  arr
+                      .filter(element => element.rate)
+                      .reduce((acc, cur) => acc + cur.rate, 0) / arr.length
+              ).toFixed(2)
+          );
 
 // "?" operator to check invalid arrays, use Number() to convert the result because toFixed() changed the type to string
 
@@ -89,9 +91,9 @@ const bestYearAvg = arr => {
     if (arr.length === 1)
         return `The best year was ${arr[0].year} with an average rate of ${arr[0].rate}`;
 
-	let orderByYear = arr.sort((a, b) => a.year - b.year);
-	
-	// Here I declare the variables to organize my ideas
+    let orderByYear = arr.sort((a, b) => a.year - b.year);
+
+    // Here I declare the variables to organize my ideas
     let currentYear = orderByYear[0].year;
     let oneYearOnly = [];
     let separatedByYear = [];
@@ -99,7 +101,7 @@ const bestYearAvg = arr => {
     let bestAvgRate = 0;
     let indexOfTheBestYear = 0;
 
-	// Make an array of arrays, which contains the movies of one year only and each position
+    // Make an array of arrays, which contains the movies of one year only and each position
     orderByYear.forEach(element => {
         if (element.year === currentYear) {
             oneYearOnly.push(element);
@@ -113,7 +115,7 @@ const bestYearAvg = arr => {
 
     rateAvgByYear = separatedByYear.map(element => ratesAverage(element)); // Reuse ratesAvarage function
 
-	// Use a loop to store the greater value of the array and get its index
+    // Use a loop to store the greater value of the array and get its index
     rateAvgByYear.forEach((element, index) => {
         if (element > bestAvgRate) {
             bestAvgRate = element;
@@ -121,6 +123,6 @@ const bestYearAvg = arr => {
         }
     });
 
-	// Get the year by acessing the prop of the array using the index of the best average 
+    // Get the year by acessing the prop of the array using the index of the best average
     return `The best year was ${separatedByYear[indexOfTheBestYear][0].year} with an average rate of ${bestAvgRate}`;
 };
